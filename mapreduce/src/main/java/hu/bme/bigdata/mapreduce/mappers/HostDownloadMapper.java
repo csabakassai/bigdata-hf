@@ -26,11 +26,13 @@ public class HostDownloadMapper extends
 		try {
 			NasaLogLine nasaLogLine = new NasaLogLine(value);
 			String hostName = nasaLogLine.getHost();
+			int i = 0;
 			if (nasaLogLine.getRequest() != null
 					&& nasaLogLine.getRequest().endsWith("html")) {
-				context.write(new Text(hostName), new IntWritable(1));
+				i = 1;
+				
 			}
-			
+			context.write(new Text(hostName), new IntWritable(i));
 			
 		} catch (Exception e) {
 			logger.error("Failed to parse line: " + value.toString());
